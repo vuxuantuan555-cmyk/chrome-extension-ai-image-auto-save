@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "AI Image Saver",
+  "version": "1.1.0",
+  "description": "Tạo ảnh AI bằng Recraft V4.1 Flash V2 (qua Beeknoee API) và tự động lưu vào thư mục Tải xuống.",
+  "minimum_chrome_version": "110",
+  "permissions": ["storage", "downloads", "contextMenus"],
+  "host_permissions": ["https://platform.beeknoee.com/*"],
+  "optional_host_permissions": ["https://*/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Tạo ảnh AI", "default_popup": "popup.html" }
+}

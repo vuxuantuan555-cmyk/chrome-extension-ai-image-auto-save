@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Tạo ảnh AI</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Tạo ảnh AI</h1>
+    <span id="chip" class="chip" data-state="IDLE">Sẵn sàng</span>
+  </header>
+
+  <ol id="steps" class="steps" aria-label="Tiến trình">
+    <li data-step="VALIDATING">Kiểm tra</li>
+    <li data-step="REQUESTING">Tạo ảnh</li>
+    <li data-step="SAVING">Lưu tệp</li>
+    <li data-step="DONE">Xong</li>
+  </ol>
+  <p id="elapsed" class="meta" hidden></p>
+
+  <label for="prompt">Mô tả ảnh</label>
+  <textarea id="prompt" rows="4" placeholder="Ví dụ: chợ nổi buổi sáng trên sông Hậu, màu nước"></textarea>
+
+  <div class="row">
+    <select id="aspect" aria-label="Tỉ lệ khung hình">
+      <option value="1:1">Vuông 1:1</option>
+      <option value="16:9">Ngang 16:9</option>
+      <option value="4:3">Ngang 4:3</option>
+      <option value="3:2">Ngang 3:2</option>
+      <option value="9:16">Dọc 9:16</option>
+      <option value="3:4">Dọc 3:4</option>
+      <option value="2:3">Dọc 2:3</option>
+    </select>
+    <button id="generate" class="primary">Tạo và lưu</button>
+    <button id="cancel" hidden>Hủy</button>
+  </div>
+
+  <p id="error" class="error" role="alert" hidden></p>
+
+  <section id="result" hidden>
+    <img id="preview" alt="Ảnh vừa tạo" hidden>
+    <p class="path">Đã lưu: <span id="savedTo"></span></p>
+    <p id="cost" class="meta" hidden></p>
+    <button id="again">Tạo ảnh khác</button>
+  </section>
+
+  <details id="settings">
+    <summary>Cài đặt API (Beeknoee)</summary>
+    <label for="apiKey">API key</label>
+    <input id="apiKey" type="password" autocomplete="off" placeholder="sk-bee-...">
+    <label for="baseUrl">Base URL</label>
+    <input id="baseUrl" type="url">
+    <label for="model">Model</label>
+    <input id="model" type="text">
+    <label for="folder">Thư mục lưu (trong Tải xuống)</label>
+    <input id="folder" type="text">
+    <button id="save">Lưu cài đặt</button>
+    <p id="saveMsg" class="note" hidden></p>
+  </details>
+
+  <script src="popup.js"></script>
+</body>
+</html>

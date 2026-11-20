@@ -1,0 +1,24 @@
+stateDiagram-v2
+    state "Sẵn sàng" as IDLE
+    state "Kiểm tra" as VALIDATING
+    state "Đang tạo ảnh (gửi yêu cầu, chờ, tải ảnh về)" as REQUESTING
+    state "Đang lưu" as SAVING
+    state "Đã lưu" as DONE
+    state "Lỗi" as ERROR
+    state "Đã hủy" as CANCELLED
+
+    [*] --> IDLE
+    IDLE --> VALIDATING: Bắt đầu
+    VALIDATING --> REQUESTING: Hợp lệ
+    VALIDATING --> ERROR: Không hợp lệ
+    REQUESTING --> SAVING: Nhận được ảnh
+    REQUESTING --> ERROR: Thất bại / hết 5 phút
+    REQUESTING --> CANCELLED: Hủy
+    SAVING --> DONE: Lưu xong
+    SAVING --> ERROR: Thất bại
+    DONE --> VALIDATING: Bắt đầu
+    ERROR --> VALIDATING: Bắt đầu
+    CANCELLED --> VALIDATING: Bắt đầu
+    DONE --> IDLE: Làm mới
+    ERROR --> IDLE: Làm mới
+    CANCELLED --> IDLE: Làm mới
